@@ -66,6 +66,36 @@ class _ProfilScreenState extends State<ProfilScreen> {
         trailing: Icon(Icons.chevron_right, color: merah ? Colors.red : kMuted),
       );
 
+    Widget _voucher() {
+    const data = [
+      ('Pulsa 10rb', '500 Poin', Icons.phone_android),
+      ('Token Listrik', '1.500 Poin', Icons.bolt),
+      ('Kupon Sembako', '1.000 Poin', Icons.shopping_basket_outlined),
+      ('Tote Bag', '800 Poin', Icons.shopping_bag_outlined),
+    ];
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      const SectionHead('Tukar Poin Bumi'),
+      GridView.count(
+        crossAxisCount: 2,
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
+        childAspectRatio: 1.6,
+        children: [
+          for (final v in data)
+            Panel(
+              child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Icon(v.$3, color: kGreen),
+                const SizedBox(height: 4),
+                Text(v.$1, style: const TextStyle(fontWeight: FontWeight.bold)),
+                Text(v.$2, style: const TextStyle(color: kMuted, fontSize: 12)),
+              ]),
+            ),
+        ],
+      ),
+    ]);
+  }
   @override
   Widget build(BuildContext context) {
     final header = Panel(
@@ -171,7 +201,7 @@ class _ProfilScreenState extends State<ProfilScreen> {
       builder: (wide) => Cols(
         wide: wide,
         left: Column(children: [header, gap, dampak, gap, dompet, gap, riwayat]),
-        right: Column(children: [akun, gap, komunitas]),
+        right: Column(children: [_voucher(), gap, akun, gap, komunitas]),
       ),
     );
   }
